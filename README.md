@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+RESTful based API created using Ruby on Rails to manage ranks in a defined structure.
 
-Things you may want to cover:
+Tools used:
 
-* Ruby version
+* Ruby on Rails v5.2.3
 
-* System dependencies
+* RubyGems
 
-* Configuration
+* Bundler
 
-* Database creation
+* ActiveRecord
 
-* Database initialization
+* PostgreSQL
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Puma HTTP Server
