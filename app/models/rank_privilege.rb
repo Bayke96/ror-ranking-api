@@ -19,6 +19,8 @@ class RankPrivilege < ApplicationRecord
 		@create = create
 		@read = read
 		@update = update
-		@delete = delete
+    @delete = delete
+  end
+  
 	
 end

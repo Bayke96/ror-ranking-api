@@ -12,5 +12,6 @@ class Rank < ApplicationRecord
   def initialize(departmentfk, name)
     @departmentfk = departmentfk
     @name = name
+  end
         
 end
