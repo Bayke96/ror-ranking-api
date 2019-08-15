@@ -7,6 +7,16 @@ class UserService
   end
 
   def create_user(user)
+
+    insert_user = user.new
+
+    insert_user.departmentfk = user.departmentfk
+    insert_user.rankfk = user.rankfk
+    insert_user.name = user.name
+    insert_user.password = user.password
+
+    insert_user.save
+
   end
 
   def edit_user(id, user)

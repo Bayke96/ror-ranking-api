@@ -1,0 +1,2 @@
+class PrivilegeController < ApplicationController
+end

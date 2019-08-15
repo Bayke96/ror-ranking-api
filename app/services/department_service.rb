@@ -7,6 +7,13 @@ class DepartmentService
   end
 
   def create_department(department)
+
+  insert_department = department.new
+
+  insert_department.name = department.name
+  insert_department.employees = 0
+  insert_department.save
+
   end
 
   def update_department(id, department)
