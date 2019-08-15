@@ -1,4 +1,4 @@
-class UserService
+class UsersService
 
   def get_user()
   end

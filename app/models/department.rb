@@ -1,17 +1,16 @@
 class Department < ApplicationRecord
 
-	// Class variables
-	attr_accessor :id, :name, :employees
+	# Class variables
+	attribute :id, :integer
+  attribute :name, :string
+  attribute :employees, :integer, default: 0
 
-  // Validations
+  # Validations
   has_many :rank
   validates :name, presence: true, uniqueness: { message: "The department's name must be unique" }, length: { in: 3..128 }
   validates :employees, numericality: { only_integer: true }
 
-  // Constructors
-  def initialize(name, employees)
-    @name = name
-    @employees = employees
-	end
+  # Constructor
+ 
 
 end

@@ -1,4 +1,4 @@
-class RankService
+class RanksService
 
   def get_rank()
   end

@@ -1,9 +1,9 @@
 class UserProfile < ApplicationRecord
 
-	// Class variables
+	# Class variables
 	attr_accessor :id, :userfk, :firstname, :lastname, :email, :phonenumber, :address
 
-  // Validators
+  # Validators
 	belongs_to :user
 	validates :userfk, presence: true, numericality: { only_integer: true }
 	validates :firstname, presence: true, length: { in: 3..128 }
@@ -12,7 +12,7 @@ class UserProfile < ApplicationRecord
 	validates :phonenumber, presence: true, length: { in: 3..50 }
 	validates :address, presence: true, length: { in: 2..128 }
 
-	// Constructors
+	# Constructors
 	def initialize(userfk, firstname, lastname, email, phonenumber, address)
 		@userfk = userfk
 		@firstname = firstname

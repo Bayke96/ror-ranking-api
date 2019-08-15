@@ -1,9 +1,9 @@
 class RankPrivilege < ApplicationRecord
 		
-	// Class variables
+	# Class variables
 	attr_accessor :id, :departmentfk, :rankfk, :create, :read, :update, :delete
 
-  // Validations
+  # Validations
   belongs_to :rank
   validates :departmentfk, presence: true, numericality: { only_integer: true }
   validates :rankfk, presence: true, numericality: { only_integer: true }
@@ -12,7 +12,7 @@ class RankPrivilege < ApplicationRecord
   validates :update, presence: true
   validates :delete, presence: true
 
-  // Constructors
+  # Constructors
 	def initialize(departmentfk, rankfk, create, read, update, delete)
 		@departmentfk = departmentfk
 		@rankfk = rankfk

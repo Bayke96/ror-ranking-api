@@ -1,4 +1,4 @@
-class ProfileService
+class ProfilesService
 
   def get_profile(id)
   end

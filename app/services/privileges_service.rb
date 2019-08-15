@@ -1,4 +1,4 @@
-class PrivilegeService
+class PrivilegesService
 
   def get_privilege(id)
   end
