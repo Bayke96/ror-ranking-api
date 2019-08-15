@@ -11,11 +11,14 @@ class DepartmentsController < ApplicationController
 
   def post_department
 
+  # Create new department object and fill it with Request data.
   created_department = Department.new
-  created_department.name = 'Nop'
+  created_department.name = params[:name].to_s
   created_department.employees = 0
   DepartmentsService.create_department(created_department)
 
+  # Return HTTP Code 200 (OK) if the process was successful.
+  head 200
   end
 
   def put_department
