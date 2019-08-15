@@ -6,7 +6,7 @@ class Rank < ApplicationRecord
   // Validators
   belongs_to :department
   validates :departmentfk, presence: true, numericality: { only_integer: true }
-  validates :name, presence: true, length: { in: 3..128 }
+  validates :name, presence: true, uniqueness: { message: "The rank's name must be unique" },length: { in: 3..128 }
 
   // Constructors
   def initialize(departmentfk, name)
