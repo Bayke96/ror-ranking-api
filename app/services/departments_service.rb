@@ -10,9 +10,12 @@ class DepartmentsService
 
   def self.create_department(department_object)
 
+  # Create a new department object and populate it.
   @createdDepartment = Department.new
   @createdDepartment.name = department_object.name.to_s
   @createdDepartment.employees = 0
+
+  # Save the department into the database.
   @createdDepartment.save
 
   end
