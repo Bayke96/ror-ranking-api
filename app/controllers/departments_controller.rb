@@ -16,7 +16,7 @@ class DepartmentsController < ApplicationController
   created_department.name = params[:name].to_s
   DepartmentsService.create_department(created_department)
 
-  # Return HTTP Code 200 (OK) if the process was successful.
+  # Return HTTP Code 201 (Created) if the process was successful.
   head 201
   end
 
