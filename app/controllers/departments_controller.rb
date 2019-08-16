@@ -1,7 +1,6 @@
 require_relative "../models/department"
 require_relative "../services/departments_service"
 
-
 class DepartmentsController < ApplicationController
 
   def list_department
@@ -36,6 +35,13 @@ class DepartmentsController < ApplicationController
 
   def post_department
 
+    # List of parameters to look for in the request.
+    required_parameters = [:name]
+    # If there are parameters missing, return Bad Request error.
+    if !required_parameters.all? {|k| params.has_key? k}
+      return render :json => nil, :status => 400
+    end
+
     # Check if there's already a department with this name.
     find_department = DepartmentsService.get_department_by_name(params[:name])
 
@@ -58,6 +64,13 @@ class DepartmentsController < ApplicationController
   end
 
   def put_department
+
+    # List of parameters to look for in the request.
+    required_parameters = [:name]
+    # If there are parameters missing, return Bad Request error.
+    if !required_parameters.all? {|k| params.has_key? k}
+      return render :json => nil, :status => 400
+    end
 
     # Check if there's a department with that ID.
     department_id = DepartmentsService.get_department(params[:id])
