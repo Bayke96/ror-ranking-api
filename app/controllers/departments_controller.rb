@@ -1,29 +1,101 @@
 require_relative "../models/department"
 require_relative "../services/departments_service"
 
+
 class DepartmentsController < ApplicationController
 
   def list_department
+
+    # Call service to return all department records.
+    department_list = DepartmentsService.list_department
+
+    # If department list is empty, return HTTP Code 204 (No Content)
+    if department_list.length == 0
+      return render :json => nil, :status => 204
+    else
+      # If okay, return HTTP Code 200 (OK)
+      return render :json => JSON.pretty_generate(department_list.as_json), :status => 200
+    end
+
   end
 
-  def get_department(id)
+  def get_department
+
+    # Call service to find the department by its ID.
+    found_department = DepartmentsService.get_department(params[:id])
+
+    # If department wasn't found, return HTTP Code 404 (Not Found)
+    if found_department == nil
+      return render :json => nil, :status => 404
+    else
+      # If okay, return HTTP Code 200 (OK)
+      return render :json => JSON.pretty_generate(found_department.as_json), :status => 200
+    end
+
   end
 
   def post_department
 
-  # Create new department object and fill it with Request data.
-  created_department = Department.new
-  created_department.name = params[:name].to_s
-  DepartmentsService.create_department(created_department)
+    # Check if there's already a department with this name.
+    find_department = DepartmentsService.get_department_by_name(params[:name])
 
-  # Return HTTP Code 201 (Created) if the process was successful.
-  head 201
+    # If there's already a department with this name, return error.
+    if find_department != nil
+      return render :json => "There's already a department with this name.", :status => 409
+    else
+      # Create new department object and fill it with Request data.
+      created_department = Department.new
+      created_department.name = params[:name].to_s
+      newest_department = DepartmentsService.create_department(created_department)
+      return render :json => JSON.pretty_generate(newest_department.as_json), :status => 201
+    end
+
   end
 
   def put_department
+
+    # Check if there's a department with that ID.
+    department_id = DepartmentsService.get_department(params[:id])
+
+    if department_id == nil
+      return render :json => nil, :status => 404
+    end
+
+    # Check if the new name conflicts with another one.
+    find_department = DepartmentsService.get_department_by_name(params[:name])
+
+    # If there's another department with that name already, return error.
+    if find_department != nil && params[:id].to_i != find_department.id.to_i
+      return render :json => "There's already a department with this name.", :status => 409
+    else
+      # If everything is fine, execute the service.
+
+      # Create new department object and populate it with the new data.
+      department = Department.new
+      department.name = params[:name].to_s
+
+      # Execute the service to update the existing department.
+      updated_department = DepartmentsService.update_department(params[:id], department)
+
+      # Return the data in JSON Format, with HTTP Code 200 (OK)
+      return render :json => JSON.pretty_generate(updated_department.as_json), :status => 200
+    end
   end
 
   def delete_department
+
+    # Check if there's a department with that ID.
+    department_id = DepartmentsService.get_department(params[:id])
+
+    # If it doesn't exist, return null.
+    if department_id == nil
+      return render :json => nil, :status => 404
+    else
+    # In case it does, execute the service and use HTTP Code 200 (OK)
+      deleted_department = DepartmentsService.delete_department(params[:id])
+      return render :json => JSON.pretty_generate(deleted_department.as_json), :status => 200
+    end
+
   end
 
 end
