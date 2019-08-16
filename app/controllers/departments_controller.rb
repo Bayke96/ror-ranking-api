@@ -43,11 +43,16 @@ class DepartmentsController < ApplicationController
     if find_department != nil
       return render :json => "There's already a department with this name.", :status => 409
     else
-      # Create new department object and fill it with Request data.
+      # Create new department object and fill it with request data.
       created_department = Department.new
       created_department.name = params[:name].to_s
       newest_department = DepartmentsService.create_department(created_department)
-      return render :json => JSON.pretty_generate(newest_department.as_json), :status => 201
+      # If the service failed for some reason, return HTTP Code 400 (Bad Request)
+      if newest_department == nil
+        return render :json => nil, :status => 400
+      else
+        return render :json => JSON.pretty_generate(newest_department.as_json), :status => 201
+      end
     end
 
   end
@@ -76,9 +81,13 @@ class DepartmentsController < ApplicationController
 
       # Execute the service to update the existing department.
       updated_department = DepartmentsService.update_department(params[:id], department)
+      if updated_department == nil
+        return render :json => nil, :status => 400
+      else
+        # Return the data in JSON Format, with HTTP Code 200 (OK)
+        return render :json => JSON.pretty_generate(updated_department.as_json), :status => 200
+      end
 
-      # Return the data in JSON Format, with HTTP Code 200 (OK)
-      return render :json => JSON.pretty_generate(updated_department.as_json), :status => 200
     end
   end
 
