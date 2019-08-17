@@ -3,10 +3,10 @@ require_relative "../services/departments_service"
 
 class DepartmentsController < ApplicationController
 
-  def list_department
+  def list_departments
 
     # Call service to return all department records.
-    department_list = DepartmentsService.list_department
+    department_list = DepartmentsService.list_departments
 
     # If department list is empty, return HTTP Code 204 (No Content)
     if department_list.length == 0

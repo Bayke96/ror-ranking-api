@@ -2,7 +2,7 @@ require_relative "../models/department"
 
 class DepartmentsService
 
-  def self.list_department
+  def self.list_departments
     return Department.all
   end
 
@@ -17,14 +17,14 @@ class DepartmentsService
   def self.create_department(department_object)
 
     # Create a new department object and populate it.
-    createdDepartment = Department.new
-    createdDepartment.name = department_object.name.to_s
-    createdDepartment.employees = 0
+    created_department = Department.new
+    created_department.name = department_object.name.to_s
+    created_department.employees = 0
 
     # If the model is valid.
-    if createdDepartment.valid?
+    if created_department.valid?
       # Save the department into the database.
-      createdDepartment.save
+      created_department.save
       # Return the newest department created.
       return Department.last
     else
@@ -32,7 +32,6 @@ class DepartmentsService
       return nil
     end
     
-
   end
 
   def self.update_department(department_id, department_object)
