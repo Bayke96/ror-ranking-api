@@ -1,15 +1,17 @@
+require_relative "../models/user_profile"
+
 class ProfilesService
 
-  def get_profile(id)
+  def get_profile(profile_id)
   end
 
-  def create_profile(profile)
+  def create_profile(profile_object)
   end
 
-  def update_profile(id, profile)
+  def update_profile(profile_id, profile_object)
   end
 
-  def delete_profile(id)
+  def delete_profile(profile_id)
   end
 
 end
