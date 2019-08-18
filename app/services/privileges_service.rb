@@ -2,8 +2,8 @@ require_relative "../models/rank_privilege"
 
 class PrivilegesService
 
-  def self.get_privileges(department_fk, rank_fk)
-    return RankPrivilege.find_by(department_id: department_fk, rank_id: rank_fk)
+  def self.get_privileges(rank_fk)
+    return RankPrivilege.find_by(rank_id: rank_fk)
   end
 
   def self.create_privileges(privilege_object)

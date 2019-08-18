@@ -6,7 +6,7 @@ class PrivilegesController < ApplicationController
   def get_privileges
 
     # Call service to find the privileges by its ID.
-    found_privileges = PrivilegesService.get_privileges(params[:department], params[:rank])
+    found_privileges = PrivilegesService.get_privileges(params[:rank])
 
     # If privileges wasn't found, return HTTP Code 404 (Not Found)
     if found_privileges == nil
@@ -28,7 +28,7 @@ class PrivilegesController < ApplicationController
     end
 
     # Check if there's already a privileges with this name.
-    find_privileges = PrivilegesService.get_privileges(params[:department_id], params[:rank_id])
+    find_privileges = PrivilegesService.get_privileges(params[:rank_id])
 
     # If there's already a privileges with this name, return error.
     if find_privileges != nil
@@ -64,7 +64,7 @@ class PrivilegesController < ApplicationController
     end
 
     # Check if there's a privileges with that ID.
-    privileges_id = PrivilegesService.get_privileges(params[:department_id], params[:rank_id])
+    privileges_id = PrivilegesService.get_privileges(params[:rank_id])
 
     if privileges_id == nil
       return render :json => nil, :status => 404
@@ -100,7 +100,7 @@ class PrivilegesController < ApplicationController
   def delete_privileges
 
     # Check if there's a privileges with that ID.
-    privileges_id = PrivilegesService.get_privileges(params[:department_id], params[:rank_id])
+    privileges_id = PrivilegesService.get_privileges(params[:rank_id])
 
     # If it doesn't exist, return null.
     if privileges_id == nil

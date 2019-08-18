@@ -16,10 +16,10 @@ Rails.application.routes.draw do
   delete 'ranks/:id', :to => 'ranks#delete_rank'
 
   # Privilege
-  get 'privileges/department/:department/rank/:rank', :to => 'privileges#get_privileges'
+  get 'privileges/:rank', :to => 'privileges#get_privileges'
   post 'privileges', :to => 'privileges#post_privileges'
-  put 'privileges/department/:department/rank/:rank', :to => 'privileges#put_privileges'
-  delete 'privileges/department/:department/rank/:rank', :to => 'privileges#delete_privileges'
+  put 'privileges/:rank', :to => 'privileges#put_privileges'
+  delete 'privileges/:rank', :to => 'privileges#delete_privileges'
 
   # User
   get 'users', :to => 'users#list_users'
